@@ -1,6 +1,17 @@
 import Head from "next/head";
+import SearchBox from "@/components/SearchBox";
+import Header from "@/components/layouts/Header";
+import AreaCard from "@/components/AreaCard";
+import study_areas_data from "../data/study_areas_data";
+import type { StudyAreaProps } from "@/components/AreaCard";
 
 export default function Home() {
+  let cards: any = [];
+
+  study_areas_data.forEach((area: StudyAreaProps) => {
+    cards.push(AreaCard(area));
+  });
+
   return (
     <>
       <Head>
@@ -9,8 +20,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <Header />
+      <main className="max-w-lg mx-auto flex flex-col justify-center px-5">
+        <SearchBox />
+        <h2 className="text-2xl mx-auto">Least Busy Spots</h2>
+        <section>{cards}</section>
       </main>
     </>
   );
