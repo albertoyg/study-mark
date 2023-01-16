@@ -2,16 +2,10 @@ import Head from "next/head";
 import SearchBox from "@/components/SearchBox";
 import Header from "@/components/layouts/Header";
 import AreaCard from "@/components/AreaCard";
-import study_areas_data from "../data/study_areas_data";
+import study_areas_data from "@/data/study_areas_data";
 import type { StudyAreaProps } from "@/components/AreaCard";
 
 export default function Home() {
-  let cards: any = [];
-
-  study_areas_data.forEach((area: StudyAreaProps) => {
-    cards.push(AreaCard(area));
-  });
-
   return (
     <>
       <Head>
@@ -24,7 +18,11 @@ export default function Home() {
       <main className="max-w-lg mx-auto flex flex-col justify-center px-5">
         <SearchBox />
         <h2 className="text-2xl mx-auto">Least Busy Spots</h2>
-        <section>{cards}</section>
+        <section>
+          {study_areas_data.map((area: StudyAreaProps, index) => {
+            return <AreaCard key={index} {...area} />;
+          })}
+        </section>
       </main>
     </>
   );
