@@ -1,5 +1,5 @@
 import study_areas_data from "@/data/study_areas_data";
-import StudyAreaCard from "@/components/StudyAreaCard";
+import Layout from "@/components/layouts/Layout";
 import type { StudyAreaProps } from "@/components/StudyAreaCard";
 
 export async function getStaticProps(context: any) {
@@ -22,5 +22,29 @@ export async function getStaticPaths() {
 }
 
 export default function StudyArea(props: any) {
-  return <StudyAreaCard area={props.area} />;
+  const { building_name, area_name, status, last_updated, id } = props.area;
+  return (
+    <Layout>
+      <div className="bg-slate-300 text-center mx-auto mt-10 py-5">
+        <h3 className="text-xl">{building_name}</h3>
+        <h4 className="text-lg">{area_name}</h4>
+        <p>{status}</p>
+        <p>Last updated: {last_updated}</p>
+      </div>
+      <h3 className="ext-xl font-medium py-10 text-center">
+        Help update the seating below
+      </h3>
+      <div className="bg-slate-300 text-center mx-auto p-3">
+        <button className="py-5 my-3 w-full bg-white shadow-md">
+          No seating
+        </button>
+        <button className="py-5 my-3 w-full bg-white shadow-md">
+          Some seating
+        </button>
+        <button className="py-5 my-3 w-full bg-white shadow-md">
+          Lots of seating
+        </button>
+      </div>
+    </Layout>
+  );
 }
