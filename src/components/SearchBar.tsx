@@ -1,36 +1,46 @@
 import { useState } from "react";
-import type { StudyAreaProps } from "./AreaCard";
+import study_areas_data from "@/data/study_areas_data";
+import StudyAreaCard from "./StudyAreaCard";
+import type { StudyAreaProps } from "./StudyAreaCard";
 
-export default function SearchBar(props: { study_areas: StudyAreaProps[] }) {
+export default function SearchBar(props: { data: StudyAreaProps[] }) {
   const [searchInput, setSearchInput] = useState("");
+  const [studyAreas, setStudyAreas] = useState(study_areas_data);
 
   const handleChange = (e: any) => {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
 
+  const handleSubmit = (e: any) => {
+    setStudyAreas(
+      studyAreas.filter((area) => {
+        return false;
+      })
+    );
+  };
+
   return (
-    <div className="max-w-lg mx-auto">
-      <form>
+    <div>
+      <div className="flex rounded py-10">
         <input
+          className="block w-full px-4 py-2 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           type="search"
           placeholder="Search here"
           onChange={handleChange}
           value={searchInput}
         />
-        <button type="submit">Search</button>
-      </form>
-
+        <button
+          className="px-4 text-white bg-blue-300 border-l rounded "
+          onClick={handleSubmit}
+        >
+          Search
+        </button>
+      </div>
+      <h2 className="text-2xl mx-auto text-center">Least Busy Spots</h2>
       <div>
-        {props.study_areas.map((area: StudyAreaProps) => {
-          return (
-            <div className="bg-slate-500 my-5">
-              <h2>{area.building_name}</h2>
-              <h2>{area.area_name}</h2>
-              <p>{area.status}</p>
-              <p>{area.last_updated}</p>
-            </div>
-          );
+        {studyAreas.map((area: StudyAreaProps, index: number) => {
+          return <StudyAreaCard {...area} />;
         })}
       </div>
     </div>

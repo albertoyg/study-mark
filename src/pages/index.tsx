@@ -1,9 +1,7 @@
 import Head from "next/head";
-import SearchBox from "@/components/SearchBox";
 import Header from "@/components/layouts/Header";
-import AreaCard from "@/components/AreaCard";
+import SearchBar from "@/components/SearchBar";
 import study_areas_data from "@/data/study_areas_data";
-import type { StudyAreaProps } from "@/components/AreaCard";
 
 export default function Home() {
   return (
@@ -16,13 +14,7 @@ export default function Home() {
       </Head>
       <Header />
       <main className="max-w-lg mx-auto flex flex-col justify-center px-5">
-        <SearchBox />
-        <h2 className="text-2xl mx-auto">Least Busy Spots</h2>
-        <section>
-          {study_areas_data.map((area: StudyAreaProps, index) => {
-            return <AreaCard key={index} {...area} />;
-          })}
-        </section>
+        <SearchBar data={study_areas_data} />
       </main>
     </>
   );
