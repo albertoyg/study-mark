@@ -3,7 +3,7 @@ import study_areas_data from "@/data/study_areas_data";
 import StudyAreaCard from "./StudyAreaCard";
 import type { StudyAreaProps } from "./StudyAreaCard";
 
-export default function SearchBar(props: { data: StudyAreaProps[] }) {
+export default function SearchArea(props: { data: StudyAreaProps[] }) {
   const [searchInput, setSearchInput] = useState("");
   const [studyAreas, setStudyAreas] = useState(study_areas_data);
 
