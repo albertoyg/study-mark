@@ -11,7 +11,7 @@ export default function Layout(props: { children: any }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="max-w-lg mx-auto px-5">{props.children}</main>
+      <main className="max-w-lg mx-auto px-5 pb-10">{props.children}</main>
     </>
   );
 }
