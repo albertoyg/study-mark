@@ -1,27 +1,26 @@
 import study_areas_data from "@/data/study_areas_data";
 import StudyAreaCard from "@/components/StudyAreaCard";
 import type { StudyAreaProps } from "@/components/StudyAreaCard";
-import studyAreas from "@/data/study_areas_data";
 
 export async function getStaticProps(context: any) {
-  const data = study_areas_data.filter((studyArea: StudyAreaProps) => {
-    return studyArea.id == context.params.id;
+  const data = study_areas_data.filter((area: StudyAreaProps) => {
+    return area.id == context.params.id;
   });
   return {
-    props: { studyArea: data },
+    props: { area: data[0] },
   };
 }
 
 export async function getStaticPaths() {
-  study_areas_data.map((studyArea: StudyAreaProps) => {
-    return {studyArea.id};
+  const paths = study_areas_data.map((studyArea: StudyAreaProps) => {
+    return { params: { id: String(studyArea.id) } };
   });
   return {
-    paths: [{ params: { id: "1" } }],
+    paths,
     fallback: false,
   };
 }
 
 export default function StudyArea(props: any) {
-  return <StudyAreaCard {...props.studyArea} />;
+  return <StudyAreaCard area={props.area} />;
 }

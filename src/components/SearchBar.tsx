@@ -40,7 +40,7 @@ export default function SearchBar(props: { data: StudyAreaProps[] }) {
       <h2 className="text-2xl mx-auto text-center">Least Busy Spots</h2>
       <div>
         {studyAreas.map((area: StudyAreaProps, index: number) => {
-          return <StudyAreaCard {...area} />;
+          return <StudyAreaCard key={index} area={area} />;
         })}
       </div>
     </div>
