@@ -5,7 +5,8 @@ import type { StudyAreaProps } from "./StudyAreaCard";
 import Fuse from "fuse.js";
 
 const options = {
-  keys: ["building_name", "area_name", "status", "last_updated"],
+  ignoreLocation: true,
+  keys: ["building_name", "area_name"],
 };
 
 const fuse = new Fuse(study_areas_data, options);
