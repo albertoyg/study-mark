@@ -11,7 +11,7 @@ export default function Home({ data }: { data: StudyAreaProps[] }) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   let { data } = await supabase.from("study_areas").select();
 
   return {

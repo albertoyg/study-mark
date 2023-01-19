@@ -1,28 +1,38 @@
-import study_areas_data from "@/data/study_areas_data";
 import Layout from "@/components/layouts/Layout";
 import type { StudyAreaProps } from "@/components/StudyAreaCard";
+import { supabase } from "@/lib/supaBaseClient";
 
 export async function getStaticProps(context: any) {
-  const data = study_areas_data.filter((area: StudyAreaProps) => {
-    return area.id == context.params.id;
-  });
+  let { params } = context;
+  let { data } = await supabase
+    .from("study_areas")
+    .select()
+    .eq("id", params.id);
   return {
-    props: { area: data[0] },
+    props: {
+      data,
+    },
   };
 }
 
 export async function getStaticPaths() {
-  const paths = study_areas_data.map((studyArea: StudyAreaProps) => {
-    return { params: { id: String(studyArea.id) } };
-  });
-  return {
-    paths,
-    fallback: false,
-  };
+  let { data } = await supabase.from("study_areas").select();
+  if (data) {
+    const paths = data.map((studyArea: StudyAreaProps) => {
+      return { params: { id: String(studyArea.id) } };
+    });
+    return {
+      paths,
+      fallback: false,
+    };
+  }
 }
 
 export default function StudyArea(props: any) {
-  const { building_name, area_name, status, last_updated, id } = props.area;
+  const { building_name, area_name, status, last_updated } = props.data[0];
+
+  const handleStatusUpdate = (status: string) => {};
+
   return (
     <Layout>
       <div className="bg-slate-300 text-center mx-auto mt-10 py-5">
@@ -35,13 +45,22 @@ export default function StudyArea(props: any) {
         Update the seating below
       </h3>
       <div className="bg-slate-300 text-center mx-auto p-3">
-        <button className="py-5 my-3 w-full bg-white shadow-md">
+        <button
+          onClick={() => handleStatusUpdate("No seating")}
+          className="py-5 my-3 w-full bg-white shadow-md"
+        >
           No seating
         </button>
-        <button className="py-5 my-3 w-full bg-white shadow-md">
+        <button
+          onClick={() => handleStatusUpdate("Some seating")}
+          className="py-5 my-3 w-full bg-white shadow-md"
+        >
           Some seating
         </button>
-        <button className="py-5 my-3 w-full bg-white shadow-md">
+        <button
+          onClick={() => handleStatusUpdate("Lots of seating")}
+          className="py-5 my-3 w-full bg-white shadow-md"
+        >
           Lots of seating
         </button>
       </div>
