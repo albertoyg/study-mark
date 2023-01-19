@@ -29,9 +29,15 @@ export async function getStaticPaths() {
 }
 
 export default function StudyArea(props: any) {
-  const { building_name, area_name, status, last_updated } = props.data[0];
+  const { building_name, area_name, status, last_updated, id } = props.data[0];
 
-  const handleStatusUpdate = (status: string) => {};
+  async function handleStatusUpdate(status: string) {
+    const { error } = await supabase
+      .from("study_areas")
+      .update({ status: status })
+      .eq("id", id);
+    console.log(id, status);
+  }
 
   return (
     <Layout>
