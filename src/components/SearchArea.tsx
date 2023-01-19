@@ -1,19 +1,19 @@
 import { useState } from "react";
-import study_areas_data from "@/data/study_areas_data";
 import StudyAreaCard from "./StudyAreaCard";
-import type { StudyAreaProps } from "./StudyAreaCard";
 import Fuse from "fuse.js";
+import type { StudyAreaProps } from "./StudyAreaCard";
 
 const options = {
   ignoreLocation: true,
   keys: ["building_name", "area_name"],
 };
 
-const fuse = new Fuse(study_areas_data, options);
-
-export default function SearchArea(props: { data: StudyAreaProps[] }) {
+export default function SearchArea(props: any) {
+  const { study_data }: { study_data: StudyAreaProps[] } = props;
   const [searchInput, setSearchInput] = useState("");
-  const [studyAreas, setStudyAreas] = useState(study_areas_data);
+  const [studyAreas, setStudyAreas] = useState(study_data);
+
+  const fuse = new Fuse(study_data, options);
 
   const handleChange = (e: any) => {
     e.preventDefault();

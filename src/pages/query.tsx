@@ -3,16 +3,17 @@ import { supabase } from "@/lib/supaBaseClient";
 function Page({ study_areas }: any) {
   return (
     <ul>
-      {study_areas.map((study_area: any) => {
-        <li>{study_area.building_name}</li>;
-      })}
+      {study_areas.map((area: any) => (
+        <li key={area.id}>
+          {area.building_name} | {area.area_name}
+        </li>
+      ))}
     </ul>
   );
 }
 
 export async function getServerSideProps() {
-  let { data } = await supabase.from("study-areas").select();
-
+  let { data } = await supabase.from("study_areas").select();
   return {
     props: {
       study_areas: data,
