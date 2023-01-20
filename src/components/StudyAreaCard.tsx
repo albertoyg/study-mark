@@ -1,4 +1,5 @@
 import formatDate from "@/lib/formateDate";
+import Link from "next/link";
 
 interface StudyAreaProps {
   id: number;
@@ -17,12 +18,12 @@ export default function StudyAreaCard(props: { area: StudyAreaProps }) {
         <p>{props.area.status}</p>
         <p>Last updated: {formatDate(props.area.updated_at)}</p>
       </div>
-      <a
+      <Link
         href={"/areas/" + props.area.id}
         className="bg-white h-1/2 mr-2 p-2 rounded-lg"
       >
         Update
-      </a>
+      </Link>
     </div>
   );
 }
