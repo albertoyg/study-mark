@@ -30,7 +30,7 @@ export default function SearchArea(props: any) {
 
   return (
     <div>
-      <div className="flex rounded py-10">
+      <form action="" className="flex rounded py-10">
         <input
           className="block w-full px-4 py-2 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           type="search"
@@ -44,7 +44,7 @@ export default function SearchArea(props: any) {
         >
           Search
         </button>
-      </div>
+      </form>
       <h2 className="text-2xl mx-auto text-center">Least Busy Spots</h2>
       <div>
         {studyAreas.map((area: StudyAreaProps, index: number) => {
