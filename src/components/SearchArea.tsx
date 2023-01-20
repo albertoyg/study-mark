@@ -26,6 +26,7 @@ export default function SearchArea(props: any) {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    console.log("Here");
     return;
   };
 
