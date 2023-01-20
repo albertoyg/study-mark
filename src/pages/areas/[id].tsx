@@ -1,51 +1,46 @@
+import { useEffect, useState } from "react";
 import Layout from "@/components/layouts/Layout";
-import type { StudyAreaProps } from "@/components/StudyAreaCard";
 import { supabase } from "@/lib/supaBaseClient";
-
-export async function getStaticProps(context: any) {
-  let { params } = context;
-  let { data } = await supabase
-    .from("study_areas")
-    .select()
-    .eq("id", params.id);
-  return {
-    props: {
-      data,
-    },
-  };
-}
-
-export async function getStaticPaths() {
-  let { data } = await supabase.from("study_areas").select();
-  if (data) {
-    const paths = data.map((studyArea: StudyAreaProps) => {
-      return { params: { id: String(studyArea.id) } };
-    });
-    return {
-      paths,
-      fallback: false,
-    };
-  }
-}
+import formatDate from "@/lib/formateDate";
 
 export default function StudyArea(props: any) {
-  const { building_name, area_name, status, last_updated, id } = props.data[0];
+  const [studyArea, setStudyArea] = useState(props.data[0]);
+
+  useEffect(() => {
+    const channel = supabase
+      .channel("study-db-changes")
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "study_areas",
+        },
+        (payload) => {
+          setStudyArea(payload.new);
+        }
+      )
+      .subscribe();
+    return () => {
+      channel.unsubscribe();
+    };
+  }, []);
 
   async function handleStatusUpdate(status: string) {
     const { error } = await supabase
       .from("study_areas")
       .update({ status: status })
-      .eq("id", id);
-    console.log(id, status);
+      .eq("id", studyArea.id);
+    console.log(studyArea.id, status);
   }
 
   return (
     <Layout>
       <div className="bg-slate-300 text-center mx-auto mt-10 py-5">
-        <h3 className="text-xl">{building_name}</h3>
-        <h4 className="text-lg">{area_name}</h4>
-        <p>{status}</p>
-        <p>Last updated: {last_updated}</p>
+        <h3 className="text-xl">{studyArea.building_name}</h3>
+        <h4 className="text-lg">{studyArea.area_name}</h4>
+        <p>{studyArea.status}</p>
+        <p>Last updated: {formatDate(studyArea.updated_at)}</p>
       </div>
       <h3 className="ext-xl font-medium py-10 text-center">
         Update the seating below
@@ -73,3 +68,35 @@ export default function StudyArea(props: any) {
     </Layout>
   );
 }
+
+export async function getServerSideProps(context: any) {
+  let { params } = context;
+  let { data } = await supabase
+    .from("study_areas")
+    .select()
+    .eq("id", params.id);
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: {
+      data,
+    },
+  };
+}
+
+// export async function getStaticPaths() {
+//   let { data } = await supabase.from("study_areas").select();
+//   if (data) {
+//     const paths = data.map((studyArea: StudyAreaProps) => {
+//       return { params: { id: String(studyArea.id) } };
+//     });
+//     return {
+//       paths,
+//       fallback: false,
+//     };
+//   }
+// }
