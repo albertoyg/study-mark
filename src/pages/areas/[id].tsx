@@ -31,7 +31,6 @@ export default function StudyArea(props: any) {
       .from("study_areas")
       .update({ status: status })
       .eq("id", studyArea.id);
-    console.log(studyArea.id, status);
   }
 
   return (
