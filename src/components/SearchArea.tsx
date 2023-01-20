@@ -25,12 +25,13 @@ export default function SearchArea(props: any) {
   };
 
   const handleSubmit = (e: any) => {
+    e.preventDefault();
     return;
   };
 
   return (
     <div>
-      <form action="" className="flex rounded py-10">
+      <form action="" className="flex rounded py-10" onSubmit={handleSubmit}>
         <input
           className="block w-full px-4 py-2 bg-white border rounded-md focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
           type="search"
@@ -38,12 +39,11 @@ export default function SearchArea(props: any) {
           onChange={handleChange}
           value={searchInput}
         />
-        <button
-          className="px-4 text-white bg-blue-300 border-l rounded "
-          onClick={handleSubmit}
-        >
-          Search
-        </button>
+        <input
+          type="submit"
+          value="Search"
+          className="px-4 text-white bg-blue-300 border-l rounded"
+        />
       </form>
       <h2 className="text-2xl mx-auto text-center">Least Busy Spots</h2>
       <div>
