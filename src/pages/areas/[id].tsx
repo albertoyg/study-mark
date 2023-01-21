@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/layouts/Layout";
 import { supabase } from "@/lib/supaBaseClient";
 import formatDate from "@/lib/formateDate";
+import Link from "next/link";
 
 export default function StudyArea(props: any) {
   const [studyArea, setStudyArea] = useState(props.data[0]);
@@ -44,6 +45,23 @@ export default function StudyArea(props: any) {
       <h3 className="ext-xl font-medium py-10 text-center">
         Update the seating below
       </h3>
+      <Link className="flex items-center bg-slate-200 p-5" href="/">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+          />
+        </svg>
+        <p className="ml-2">Back</p>
+      </Link>
       <div className="bg-slate-300 text-center mx-auto p-3">
         <button
           onClick={() => handleStatusUpdate("No seating")}
