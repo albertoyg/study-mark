@@ -11,8 +11,11 @@ export default function Home({ data }: { data: StudyAreaProps[] }) {
   );
 }
 
-export async function getStaticProps(context: any) {
-  let { data } = await supabase.from("study_areas").select();
+export async function getServerSideProps(context: any) {
+  let { data } = await supabase
+    .from("study_areas")
+    .select()
+    .order("id", { ascending: true });
 
   return {
     props: {
