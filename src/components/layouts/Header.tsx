@@ -9,7 +9,7 @@ export default function Header() {
           <Link href="/">Study-Mark</Link>
         </h1>
         <div className="w-1/2 flex justify-center items-center">
-          <Link className="bg-slate-200 p-4 mr-5 rounded-md" href="/auth">
+          <Link className="bg-slate-200 p-4 mr-5 rounded-md" href="/login">
             Login/Signup
           </Link>
         </div>
