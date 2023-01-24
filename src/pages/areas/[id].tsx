@@ -105,15 +105,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-// export async function getStaticPaths() {
-//   let { data } = await supabase.from("study_areas").select();
-//   if (data) {
-//     const paths = data.map((studyArea: StudyAreaProps) => {
-//       return { params: { id: String(studyArea.id) } };
-//     });
-//     return {
-//       paths,
-//       fallback: false,
-//     };
-//   }
-// }
+export {};
