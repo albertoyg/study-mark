@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supaBaseClient";
 export default function Home({ data }: { data: StudyAreaProps[] }) {
   return (
     <Layout>
+      {/* buttons here for posting */}
       <SearchArea study_data={data} />
     </Layout>
   );
