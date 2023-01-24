@@ -2,14 +2,14 @@ import Layout from "@/components/layouts/Layout";
 import { useRouter } from "next/router";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useEffect, useState } from "react";
+import { DispatchWithoutAction, useEffect, useState } from "react";
 
 // Hello
 const LoginPage = () => {
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
   const user = useUser();
-  const [data, setData] = useState();
+  const [data, setData] = useState<any | null>();
 
   useEffect(() => {
     async function loadData() {
@@ -23,6 +23,14 @@ const LoginPage = () => {
   if (!user)
     return (
       <Layout>
+        <div className="flex-col justify-center mt-5">
+          <h2 className="text-xl text-center">
+            To post study sessions, make an account with us!
+          </h2>
+          <h3 className="text-lg text-center">
+            (Google sign in and other on the way)
+          </h3>
+        </div>
         <div className="mt-10">
           <Auth
             redirectTo="http://localhost:3000/"
