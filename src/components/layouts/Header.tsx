@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function Header() {
+  const user = useUser();
   return (
     <header className="flex-col justify-between">
+      {user && <div>Hello there</div>}
       <div className="flex">
         <div className="w-1/2"></div>
         <h1 className="text-3xl w-screen py-10 font-bold text-center">
