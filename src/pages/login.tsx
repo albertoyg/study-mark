@@ -2,7 +2,7 @@ import Layout from "@/components/layouts/Layout";
 import { useRouter } from "next/router";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { DispatchWithoutAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const LoginPage = () => {
   const supabaseClient = useSupabaseClient();
