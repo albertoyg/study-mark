@@ -27,8 +27,8 @@ const LoginPage = () => {
           <h2 className="text-xl text-center">
             To post study sessions, make an account with us!
           </h2>
-          <h3 className="text-lg text-center">
-            (Google sign in and other on the way)
+          <h3 className="text-md text-center">
+            (Google sign in and others on the way)
           </h3>
         </div>
         <div className="mt-10">
