@@ -4,7 +4,7 @@ import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { DispatchWithoutAction, useEffect, useState } from "react";
 
-// Hello
+// I made another change
 const LoginPage = () => {
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
