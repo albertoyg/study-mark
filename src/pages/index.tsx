@@ -7,6 +7,7 @@ export default function Home({ data }: { data: StudyAreaProps[] }) {
   return (
     <Layout>
       {/* buttons here for posting <----- I SEE THIS! YESSS*/}
+      {/* Made another change */}
       <SearchArea study_data={data} />
     </Layout>
   );
