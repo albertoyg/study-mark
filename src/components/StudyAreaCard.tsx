@@ -19,7 +19,7 @@ export default function StudyAreaCard(props: { area: StudyAreaProps }) {
         <p>Last updated: {formatDate(props.area.updated_at)}</p>
       </div>
       <Link
-        href={"/areas/" + props.area.id}
+        href={"/area/" + props.area.id}
         className="bg-white h-1/2 mr-2 p-2 rounded-lg"
       >
         Update
